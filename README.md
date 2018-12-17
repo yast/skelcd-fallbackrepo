@@ -17,14 +17,17 @@ To support a new product `FOO`:
 
 1. Create a new sub-package of `skelcd-fallbackrepo` named
   `skelcd-fallbackrepo-FOO`. This is relatively easy as `skelcd-fallbackrepo`
-  is a multibuild package. The package is maintained in the OBS. The spec file is
-  [here](https://build.opensuse.org/package/view_file/system:install:head/skelcd-fallbackrepo/skelcd-fallbackrepo.spec),
-  the multibuild definitions are
-  [here](https://build.opensuse.org/package/view_file/system:install:head/skelcd-fallbackrepo/_multibuild).
+  is a multibuild package. Add the product name (`FOO`) to
+  [`_multibuild`](https://build.opensuse.org/package/view_file/system:install:head/skelcd-fallbackrepo/_multibuild).
 
-2. Add `skelcd-fallbackrepo-FOO` to the spec file of
-  [`installation-images`](https://github.com/openSUSE/installation-images). The spec file
-  is maintained in the OBS
-  [here](https://build.opensuse.org/package/view_file/system:install:head/installation-images/installation-images.spec).
+2. Adjust
+  [skelcd-fallbackrepo.spec](https://build.opensuse.org/package/view_file/system:install:head/skelcd-fallbackrepo/skelcd-fallbackrepo.spec) and
+  add a new `%theme` macro matching your product. The product name from `_multibuild` is visible as `%flavor` in the spec file.
+  Be careful as not every product is built on every architecture.
+
+2. Add `skelcd-fallbackrepo-FOO` to the `BuildRequires` of the spec file of
+  [`installation-images`](https://github.com/openSUSE/installation-images).
+  [installation-images.spec](https://build.opensuse.org/package/view_file/system:install:head/installation-images/installation-images.spec) is
+  maintained in the OBS. Again, be careful as not every product is available on every architecture.
 
 `skelcd-fallbackrepo` itself does not contain any sources beside the spec file.
